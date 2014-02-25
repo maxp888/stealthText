@@ -18,8 +18,6 @@ char code[7][5] = {
 	{'6','7','8','9','0'}
 };
 
-//this is a change
-
 void clear(){
 	row = -1;
 	col = -1;
