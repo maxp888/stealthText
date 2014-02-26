@@ -4,8 +4,8 @@ unsigned long PUSH_THRESH = 1000;
 unsigned long LONGPRESS_THRESH = 1000;
 //unsigned long ENTRY_THRESH = 25;
 unsigned int PRESSURE_THRESH = 250;
-int btn1pin = 0;
-int btn2pin = 0;
+int btn1pin = A0;
+int btn2pin = A0;
 int row, col;
 bool delFlg, spcFlg, rowFlg, colFlg;
 char code[7][5] = {
