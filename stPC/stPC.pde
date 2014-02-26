@@ -25,16 +25,21 @@ void setup(){
 void draw(){
 	background(255);
 	fill(0);
-	if (inString == "DEL"){
-		if (showString != null and showString.length() > 1) {
-			showString = showString.substring(0,showString.length()-1);
+	if (inString != null) {
+		if (inString == "DEL"){
+			if (showString != null and showString.length() > 1) {
+				showString = showString.substring(0,showString.length()-1);
+			} else {
+				showString = "";
+			}
+		} else if (inString == "SPC"){
+			showString += ' ';
+		} else if (inString == "SEND"){
+			showString = "MSG SENT:" + '\n' + showString;
 		} else {
-			showString = "";
+			showString += inString;
 		}
-	} else if (inString == "SPC"){
-		showString += ' ';
-	}else {
-		showString += inString;
+		inString = null;
 	}
 	textSize(24);
 	textAlign(CENTER);
