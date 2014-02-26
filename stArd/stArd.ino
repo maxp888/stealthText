@@ -98,4 +98,4 @@ void loop() {
   //store button vals
   oldb1 = b1;
   oldb2 = b2;
-}//test again
+}//test again 2
