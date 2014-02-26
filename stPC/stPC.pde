@@ -10,9 +10,9 @@ import processing.serial.*;
 Serial port;
 String inString;
 String showString;
+String bldString;
 int lf = 10;
-
-boolean sw = true;
+boolean clr = true;
 
 void setup(){
 	size(480,580);
@@ -25,27 +25,51 @@ void setup(){
 void draw(){
 	background(255);
 	fill(0);
-	if (inString != null) {
-		if (inString == "DEL"){
-			if (showString != null and showString.length() > 1) {
-				showString = showString.substring(0,showString.length()-1);
-			} else {
-				showString = "";
-			}
-		} else if (inString == "SPC"){
-			showString += ' ';
-		} else if (inString == "SEND"){
-			showString = "MSG SENT:" + '\n' + showString;
-		} else {
-			showString += inString;
-		}
-		inString = null;
+	if (showString != null && showString.length() >= 1) {
+		textSize(24);
+		textAlign(CENTER);
+		text(showString,width/2,60);	
+		//showString = null;
 	}
-	textSize(24);
-	textAlign(CENTER);
-	text(showString,10,60);
+	
 }
 
 void serialEvent(Serial p){
 	inString = p.readString();
+	inString = inString.substring(0,inString.length()-2);
+	print(inString);
+	parseString(inString);
+}
+
+void parseString(String s){
+	if (s.equals("DEL")){
+		if ((bldString != null) && (bldString.length() >= 1)) {
+			bldString = bldString.substring(0,bldString.length()-1);
+		} else {
+			bldString = "";
+		}
+		showString = bldString;
+	} else if (s.equals("SPC")){
+		if (bldString == null) {
+			bldString = " ";
+		} else {
+			bldString += " ";
+		} 
+		showString = bldString;
+	} else if (s.equals("SEND")){
+		if ((bldString == null)||(bldString.length() == 0)) {
+			showString = "MSG NOT SENT: \nNo valid msg!";
+		}else {
+			showString = "MSG SENT:" + '\n' + bldString;
+		}
+		bldString = null;
+	} else {
+		if (bldString == null){
+			bldString = s;
+		} else {
+			bldString += s;
+		}
+		showString = bldString;
+	}
+	
 }
