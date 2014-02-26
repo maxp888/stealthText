@@ -2,7 +2,7 @@ bool oldb1, oldb2, b1, b2;
 unsigned long high1, high2, low1, low2, timer, lTime, hiTime;
 unsigned long PUSH_THRESH = 1000;
 unsigned long LONGPRESS_THRESH = 1000;
-unsigned long ENTRY_THRESH = 25;
+//unsigned long ENTRY_THRESH = 25;
 unsigned int PRESSURE_THRESH = 250;
 int btn1pin = 0;
 int btn2pin = 0;
@@ -67,7 +67,7 @@ void loop() {
   	if (hiTime >= LONGPRESS_THRESH){
   		delFlg = true;
   		low1 = lTime;
-  	} else if ((hiTime >= ENTRY_THRESH) and (hiTime < LONGPRESS_THRESH)){
+  	} else {
   		rowFlg = true;
   		row++;
   		low1 = lTime;
@@ -82,7 +82,7 @@ void loop() {
   	if (hiTime >= LONGPRESS_THRESH){
   		spcFlg = true;
   		low2 = lTime;
-  	} else if ((hiTime >= ENTRY_THRESH) and (hiTime < LONGPRESS_THRESH)){
+  	} else {
   		colFlg = true;
   		col++;
   		low2 = lTime;
